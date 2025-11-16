@@ -3,3 +3,4 @@ foods.csv
 .venv/
 venv/
 __pycache__/
+.idea/
