@@ -1,4 +1,4 @@
-from Database import Base
+from db.Database import Base
 from sqlalchemy import Column, Integer, String, Float
 
 
@@ -12,6 +12,6 @@ class Products(Base):
 
     name = Column(String)
     calories = Column(Float)
-    proteins = Column(Float),
+    proteins = Column(Float)
     fats = Column(Float)
     carbohydrates = Column(Float)

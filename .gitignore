@@ -1,5 +1,5 @@
-dbase.sql
-foods.csv
+*.sql
+*.csv
 .venv/
 venv/
 __pycache__/
