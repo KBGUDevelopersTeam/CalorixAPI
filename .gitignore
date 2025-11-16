@@ -2,3 +2,4 @@ dbase.sql
 foods.csv
 .venv/
 venv/
+__pycache__/
