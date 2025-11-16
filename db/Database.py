@@ -13,13 +13,6 @@ session = sessionmaker(autoflush=True, bind=engine)
 class Base(DeclarativeBase): pass
 
 
-def get_db():
-    db = session()
-    try:
-        yield db
-    finally:
-        db.close()
-
 def db_init():
     Base.metadata.create_all(bind=engine)
 
