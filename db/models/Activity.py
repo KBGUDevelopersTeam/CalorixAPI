@@ -1,9 +1,9 @@
-from Database import Base
+from db.Database import Base
 from sqlalchemy import Column, Integer, String, Float
 
 
-class Products(Base):
-    __tablename__ = "products"
+class Activity(Base):
+    __tablename__ = "activity"
 
     id = Column(Integer,
                 primary_key=True,
@@ -11,7 +11,4 @@ class Products(Base):
                 autoincrement=True)
 
     name = Column(String)
-    calories = Column(Float)
-    proteins = Column(Float),
-    fats = Column(Float)
-    carbohydrates = Column(Float)
+    ratio = Column(Float)

@@ -5,20 +5,22 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
 
-
-
 engine = create_engine("postgresql://cyberamirka:amir@localhost/Calorix", echo=True)
-session = None
+session = sessionmaker(autoflush=True, bind=engine)
 
 
 # базоый класс по отношению ко всем классам, необходим для взаимодействия с таблицами
 class Base(DeclarativeBase): pass
 
 
+def get_db():
+    db = session()
+    try:
+        yield db
+    finally:
+        db.close()
 
-
-
-def dbinit():
+def db_init():
     Base.metadata.create_all(bind=engine)
 
 
