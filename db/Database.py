@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
 
-engine = create_engine("postgresql://cyberamirka:amir@localhost/Calorix", echo=True)
+engine = create_engine("postgresql://calorix_user:developers_team_password@localhost/Calorix", echo=True)
 session = sessionmaker(autoflush=True, bind=engine)
 
 
