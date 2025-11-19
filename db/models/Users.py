@@ -10,5 +10,5 @@ class Users(Base):
                 nullable=False,
                 autoincrement=True)
 
-    email = Column(String)
-    psswd = Column(String)
+    email = Column(String(100))
+    psswd = Column(String(50))

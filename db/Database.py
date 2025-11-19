@@ -1,19 +1,28 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
 
-engine = create_engine("postgresql://calorix_user:developers_team_password@localhost/Calorix", echo=True)
-session = sessionmaker(autoflush=True, bind=engine)
+# Асинхронный движок с asyncpg драйвером
+engine = create_async_engine(
+    "postgresql+asyncpg://calorix_user:developers_team_password@localhost/Calorix", 
+    echo=False
+)
+
+# Асинхронная сессия
+async_session = async_sessionmaker(
+    engine, 
+    class_=AsyncSession,
+    expire_on_commit=False,
+    autoflush=True
+)
 
 
-# базоый класс по отношению ко всем классам, необходим для взаимодействия с таблицами
-class Base(DeclarativeBase): pass
+# Базовый класс для всех моделей
+class Base(DeclarativeBase):
+    pass
 
 
-def db_init():
-    Base.metadata.create_all(bind=engine)
-
-
+# Асинхронная инициализация базы данных
+async def db_init():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
