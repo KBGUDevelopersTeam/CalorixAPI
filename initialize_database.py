@@ -1,5 +1,5 @@
-from db.Database import db_init
-from db.Database import session
+from db.base import db_init
+from db.base import session
 from db.models.Products import Products
 
 import csv

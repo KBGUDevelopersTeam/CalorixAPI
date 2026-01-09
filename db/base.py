@@ -5,11 +5,11 @@ from sqlalchemy.orm import DeclarativeBase
 # Асинхронный движок с asyncpg драйвером
 engine = create_async_engine(
     "postgresql+asyncpg://calorix_user:developers_team_password@localhost/Calorix", 
-    echo=False
+    echo=True
 )
 
 # Асинхронная сессия
-async_session = async_sessionmaker(
+SessionLocal = async_sessionmaker(
     engine, 
     class_=AsyncSession,
     expire_on_commit=False,
@@ -20,6 +20,18 @@ async_session = async_sessionmaker(
 # Базовый класс для всех моделей
 class Base(DeclarativeBase):
     pass
+
+
+
+async def get_db():
+    async with SessionLocal() as db:
+        try:
+            yield db
+            await db.commit()
+        except Exception as e:
+            await db.rollback()
+            raise
+
 
 
 # Асинхронная инициализация базы данных
