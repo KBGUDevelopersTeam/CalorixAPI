@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from db.models.Users import Users
-from db.Database import session
+from db.base import session
 from api.Types.user import User
 # from Types.user import User
 
